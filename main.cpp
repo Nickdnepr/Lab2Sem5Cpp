@@ -1,8 +1,25 @@
 #include <iostream>
-#include <stack>
 #include <string>
 
 using namespace std;
+
+class Stack {
+private:
+    double body[1000];
+    int pointer = 0;
+public:
+    void push(double val) {
+        body[++pointer] = val;
+    }
+
+    void pop() {
+        pointer--;
+    }
+
+    double top() {
+        return body[pointer];
+    }
+};
 
 class Operation {
 private:
@@ -36,7 +53,8 @@ public:
 class Parser {
 private:
     string expression;
-    stack<double> st;
+//    stack<double> st;
+    Stack st;
 
     bool isDigit(char c) {
         return (47 < c && c < 58);
@@ -64,7 +82,7 @@ public:
                 s = "";
                 continue;
             }
-            if (s.length()>0){
+            if (s.length() > 0) {
                 st.push(stod(s));
             }
             s = "";
